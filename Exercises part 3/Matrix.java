@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Matrix {
     public static void main(String[] args) {
-//        one();
-//        two();
-//        three();
+        one();
+        two();
+        three();
         four();
     }
     public static void one() {
