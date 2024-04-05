@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class Matrix {
     public static void main(String[] args) {
-        one();
-        two();
-        three();
+//        one();
+//        two();
+//        three();
+        four();
     }
     public static void one() {
         System.out.println("--1--");
@@ -70,6 +71,25 @@ public class Matrix {
             System.out.println("The diagonals are equal");
         }else if(generalDiagonal<secondaryDigonal){
             System.out.println("Secondary diagonal is bigger");
+        }
+    }
+    public static void four() {
+        System.out.println("--4--");
+        Scanner obj=new Scanner(System.in);
+        int[][] matrix=new int[3][3];
+
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix.length;j++){
+                matrix[i][j]=obj.nextInt();
+            }
+        }
+        String col="";
+        for(int j=0;j<matrix.length;j++){
+            for(int i=matrix.length-1;i>=0;i--){
+                col+=matrix[i][j];
+            }
+            System.out.println(col);
+            col="";
         }
     }
 }
