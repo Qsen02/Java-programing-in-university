@@ -1,5 +1,5 @@
-import java.lang.Math;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Arrays
 {
@@ -8,6 +8,7 @@ public class Arrays
 	   two();
 	   three();
 	   four();
+	   five();
 	   six();
 	   seven();
 	   eight();
@@ -94,6 +95,29 @@ public class Arrays
 		  for(int i=0;i<fiveCount;i++){
 		     System.out.println(five[i]);
 		 }
+	}
+	public static void five(){
+		System.out.println("--5--");
+		Scanner obj=new Scanner(System.in);
+		int n=obj.nextInt();
+		int[] arr=new int[n];
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		for(int i=0;i<arr.length;i++){
+			arr[i]=obj.nextInt();
+		}
+		for(int i=0;i<arr.length;i++){
+			int count=0;
+			if(list.contains(arr[i])){
+				continue;
+			}
+			for(int j=0;j<arr.length;j++){
+				if(arr[i]==arr[j]) {
+					count++;
+				}
+			}
+			System.out.printf("%d:%d\n",arr[i],count);
+			list.add(arr[i]);
+		}
 	}
 	public static void six(){
 	     System.out.println("--6--");
