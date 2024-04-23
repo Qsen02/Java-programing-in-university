@@ -2,6 +2,73 @@ import java.util.Scanner;
 import java.lang.Math;
 import java.util.ArrayList;
 
+class Time{
+    private int hour;
+    private int minute;
+    private int second;
+    private int millisecond;
+    public Time(int hour, int minute, int second,int millisecond){
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        this.millisecond = millisecond;
+    }
+    public int getHour(){
+        return hour;
+    }
+    public void setHour(int newHour){
+        this.hour = newHour;
+    }
+    public int getMinute(){
+        return minute;
+    }
+    public void setMinute(int newMinute){
+        this.minute = newMinute;
+    }
+    public int getSecond(){
+        return second;
+    }
+    public void setSecond(int newSecond){
+        this.second = newSecond;
+    }
+    public int getMillisecond(){
+        return millisecond;
+    }
+    public void setMillisecond(int newMillisecond){
+        this.millisecond = newMillisecond;
+    }
+    public void printTime(){
+        System.out.printf("%d:%d:%d:%d", this.hour, this.minute, this.second, this.millisecond);
+    }
+}
+
+class Triangle{
+    private int a,b,c;
+    public Triangle(int a,int b,int c){
+        this.a=a;
+        this.b=b;
+        this.c=c;
+    }
+    public int getA(){
+        return a;
+    }
+    public void setA(int newA){
+        this.a=newA;
+    }
+    public int getB(){
+        return b;
+    }
+    public void setB(int newB){
+        this.b=newB;
+    }
+    public int getC(){
+        return c;
+    }
+    public void setC(int newC){
+        this.c=newC;
+    }
+}
+
 class Student{
     private String firstName;
     private String lastName;
@@ -14,6 +81,7 @@ class Student{
         this.gender=gender;
     }
     public String getFirstName(){
+
         return firstName;
     }
     public void setFirstName(String newFirstName){
@@ -82,6 +150,41 @@ class Rational{
 }
 
 public class Constructors {
+    public static void five(){
+        System.out.println("--5--");
+        Scanner obj=new Scanner(System.in);
+        int hour=obj.nextInt();
+        int minute=obj.nextInt();
+        int second=obj.nextInt();
+        int millisecond=obj.nextInt();
+        Time t=new Time(0,0,0,0);
+        if((hour<13 && hour>0)&&(minute<60 && minute>0)&&(second<60 && second>0)&&(millisecond<1000 && millisecond>0)){
+            t.setHour(hour);
+            t.setMinute(minute);
+            t.setSecond(second);
+            t.setMillisecond(millisecond);
+            t.printTime();
+        }else{
+            System.out.println("Error");
+        }
+    }
+    public static void four(){
+        System.out.println("--4--");
+        Scanner obj=new Scanner(System.in);
+        int a= obj.nextInt();
+        int b=obj.nextInt();
+        int c=obj.nextInt();
+        Triangle t=new Triangle(0,0,0);
+        if(a<c+b && b<a+c && c<a+b){
+            t.setA(a);
+            t.setB(b);
+            t.setC(c);
+            System.out.println("Yes this is a triangle");
+            System.out.printf("a:%d b:%d c:%d",t.getA(),t.getB(),t.getC());
+        }else{
+            System.out.println("No this is not a triangle");
+        }
+    }
     public static void three(){
         System.out.println("--3--");
         Scanner obj=new Scanner(System.in);
@@ -151,5 +254,7 @@ public class Constructors {
         one();
         two();
         three();
+        four();
+        five();
     }
 }
