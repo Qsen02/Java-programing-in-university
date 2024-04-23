@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.lang.Math;
-import java.util.ArrayList;
 
 class Time{
     private int hour;
@@ -81,7 +80,6 @@ class Student{
         this.gender=gender;
     }
     public String getFirstName(){
-
         return firstName;
     }
     public void setFirstName(String newFirstName){
@@ -188,30 +186,34 @@ public class Constructors {
     public static void three(){
         System.out.println("--3--");
         Scanner obj=new Scanner(System.in);
-        ArrayList<Student> studentlist=new ArrayList<Student>();
-        String choose="y";
-        while(choose.equals("y")){
-            System.out.println("Do you want to add more Students(y/n)?");
-            choose=obj.next();
-            if(choose.equals("y")){
-                System.out.println("Next student:");
-                Student student=new Student(" "," ",0," ");
-                String firstName= obj.next();
-                String lastName= obj.next();
-                double grade= obj.nextDouble();
-                String gender= obj.next();
-                student.setFirstName(firstName);
-                student.setLastName(lastName);
-                student.setGrade(grade);
-                student.setGender(gender);
-                studentlist.add(student);
-            }else{
-                break;
-            }
-        }
-        for(Student student:studentlist){
-            System.out.printf("First name:%s Last name:%s Grade:%f Gender:%s\n",student.getFirstName(),student.getLastName(),student.getGrade(),student.getGender());
-        }
+        System.out.println("Enter first student:");
+        String firstName1=obj.next();
+        String lastName1=obj.next();
+        double grade1=obj.nextDouble();
+        String gender1=obj.next();
+        System.out.println("Enter second student:");
+        String firstName2=obj.next();
+        String lastName2=obj.next();
+        double grade2=obj.nextDouble();
+        String gender2=obj.next();
+        System.out.println("Enter third student:");
+        String firstName3=obj.next();
+        String lastName3=obj.next();
+        double grade3=obj.nextDouble();
+        String gender3=obj.next();
+        System.out.println("Enter fourth student:");
+        String firstName4=obj.next();
+        String lastName4=obj.next();
+        double grade4=obj.nextDouble();
+        String gender4=obj.next();
+        Student s1=new Student(firstName1,lastName1,grade1,gender1);
+        Student s2=new Student(firstName2,lastName2,grade2,gender2);
+        Student s3=new Student(firstName3,lastName3,grade3,gender3);
+        Student s4=new Student(firstName4,lastName4,grade4,gender4);
+        System.out.printf("First name:%s Last name:%s Grade:%f Gender:%s\n",s1.getFirstName(),s1.getLastName(),s1.getGrade(),s1.getGender());
+        System.out.printf("First name:%s Last name:%s Grade:%f Gender:%s\n",s2.getFirstName(),s2.getLastName(),s1.getGrade(),s2.getGender());
+        System.out.printf("First name:%s Last name:%s Grade:%f Gender:%s\n",s3.getFirstName(),s3.getLastName(),s1.getGrade(),s3.getGender());
+        System.out.printf("First name:%s Last name:%s Grade:%f Gender:%s\n",s4.getFirstName(),s4.getLastName(),s1.getGrade(),s4.getGender());
     }
     public static void two(){
         System.out.println("--2--");
