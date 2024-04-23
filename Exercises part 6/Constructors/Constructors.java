@@ -1,6 +1,88 @@
 import java.util.Scanner;
 import java.lang.Math;
 
+class Reseat{
+    private String date;
+    private int amount;
+    private double price;
+    public Reseat(String date, int amount, double price){
+        this.date = date;
+        this.amount = amount;
+        this.price = price;
+    }
+    public String getDate(){
+        return this.date;
+    }
+    public int getAmount(){
+        return this.amount;
+    }
+    public double getPrice(){
+        return this.price;
+    }
+    public void setDate(String newDate){
+        this.date = newDate;
+    }
+    public void setAmount(int newAmount){
+        this.amount = newAmount;
+    }
+    public void setPrice(double newTax){
+        this.price = newTax;
+    }
+    public void printTax(){
+        System.out.printf("Date:%s Amount:%d Tax:%f", this.date, this.amount,this.price *this.amount);
+    }
+}
+
+class Date {
+    private int dayOfMonth;
+    private int month;
+    private int dayOfWeek;
+    private int year;
+
+    public Date(int dayOfMonth, int month, int dayOfWeek, int year) {
+        this.dayOfMonth = dayOfMonth;
+        this.month = month;
+        this.dayOfWeek = dayOfWeek;
+        this.year = year;
+    }
+
+    public int getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setDayOfMonth(int newDayOfMonth) {
+        this.dayOfMonth = newDayOfMonth;
+    }
+
+    public void setMonth(int newMonth) {
+        this.month = newMonth;
+    }
+
+    public void setDayOfWeek(int newDayOfWeek) {
+        this.dayOfWeek = newDayOfWeek;
+    }
+
+    public void setYear(int newYear) {
+        this.year = newYear;
+    }
+
+    public void printDate() {
+            System.out.printf("%d.%d.%d.%d\n", this.dayOfMonth, this.month, this.dayOfWeek, this.year);
+    }
+}
+
 class Time{
     private int hour;
     private int minute;
@@ -147,7 +229,34 @@ class Rational{
     }
 }
 
-public class Constructors {
+ class Constructors {
+    public static void seven(){
+        System.out.println("--7--");
+        Scanner obj = new Scanner(System.in);
+        String date = obj.nextLine();
+        int amount = obj.nextInt();
+        double price=obj.nextDouble();
+        if(amount>=0 && price>=0){
+            Reseat res=new Reseat(date,amount,price);
+            res.printTax();
+        }else{
+            System.out.println("Error");
+        }
+    }
+    public static void six() {
+        System.out.println("--6--");
+        Scanner obj = new Scanner(System.in);
+        int dm = obj.nextInt();
+        int m = obj.nextInt();
+        int dw = obj.nextInt();
+        int y = obj.nextInt();
+        if ((dm < 32 && dm > 0) && (m < 13 && m > 0) && (dw < 8 && dw > 0)) {
+            Date date=new Date(dm,m,dw,y);
+            date.printDate();
+        }else{
+            System.out.println("Invalid date!");
+        }
+    }
     public static void five(){
         System.out.println("--5--");
         Scanner obj=new Scanner(System.in);
@@ -258,5 +367,7 @@ public class Constructors {
         three();
         four();
         five();
+        six();
+        seven();
     }
 }
