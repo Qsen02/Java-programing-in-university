@@ -1,6 +1,99 @@
 import java.util.Scanner;
 import java.lang.Math;
 
+class User{
+    private String username;
+    private String password;
+    private String registrationDate;
+    public User(String username, String password, String registrationDate) {
+        this.username = username;
+        this.password = password;
+        this.registrationDate = registrationDate;
+    }
+    public void printUser(){
+        System.out.printf("Username: %s\n", this.username);
+        System.out.printf("Password: %s\n", this.password);
+        System.out.printf("Registration Date: %s\n", this.registrationDate);
+    }
+}
+
+class Ship{
+    private String type;
+    private double weight;
+    private double length;
+    private String cargoType;
+    private String companyName;
+    public Ship(String type, double weight, double length, String cargoType, String companyName){
+        this.type = type;
+        this.weight = weight;
+        this.length = length;
+        this.cargoType = cargoType;
+        this.companyName = companyName;
+    }
+    public void printShip(){
+        System.out.printf("Type: %s\n", this.type);
+        System.out.printf("Weight: %f\n", this.weight);
+        System.out.printf("Length: %f\n", this.length);
+        System.out.printf("CargoType: %s\n", this.cargoType);
+        System.out.printf("CompanyName: %s\n", this.companyName);
+    }
+}
+
+class Delivery{
+    private double packageWeight;
+    private double packagePrice;
+    private boolean isUrgent;
+    public Delivery(double packageWeight, double packagePrice, boolean isUrgent){
+        this.packageWeight = packageWeight;
+        this.packagePrice = packagePrice;
+        this.isUrgent = isUrgent;
+    }
+    public void printDelivery(){
+        System.out.printf("Weight: %f\n",this.packageWeight);
+        System.out.printf("Price: %f\n",this.packagePrice);
+        System.out.printf("Urgent: %b",this.isUrgent);
+    }
+}
+
+class Fraction{
+    private int enumenator;
+    private int denumenator;
+    public Fraction(int enumenator,int denumenator){
+        this.enumenator=enumenator;
+        this.denumenator=denumenator;
+    }
+    public void print(){
+        System.out.printf("%d/%d",this.enumenator,this.denumenator);
+    }
+
+}
+
+class Laptop{
+    private int ram;
+    private double cpuClock;
+    private String cpuModel;
+    private String gpuModel;
+    public Laptop(int ram, double cpuClock, String cpuModel, String gpuModel){
+        this.ram = ram;
+        this.cpuClock = cpuClock;
+        this.cpuModel = cpuModel;
+        this.gpuModel=gpuModel;
+    }
+    public void betterLaptop(Laptop newLaptop){
+       if(this.ram>newLaptop.ram){
+           System.out.println("First laptop is better");
+       }else if(this.ram<newLaptop.ram){
+           System.out.println("Second laptop is better");
+       }else{
+           if(this.cpuClock>newLaptop.cpuClock){
+               System.out.println("First laptop is better");
+           }else{
+               System.out.println("Second laptop is better");
+           }
+       }
+    }
+}
+
 class Reseat{
     private String date;
     private int amount;
@@ -230,6 +323,60 @@ class Rational{
 }
 
  class Constructors {
+    public static void twelve(){
+        System.out.println("--12--");
+        Scanner obj = new Scanner(System.in);
+        String username=obj.next();
+        String password=obj.next();
+        String registrationDate=obj.next();
+        User user = new User(username,password,registrationDate);
+        user.printUser();
+    }
+    public static void eleven(){
+        System.out.println("--11--");
+        Scanner obj = new Scanner(System.in);
+        String type=obj.next();
+        double weight=obj.nextDouble();
+        double length=obj.nextDouble();
+        String cargoType=obj.next();
+        String companyName=obj.next();
+        Ship ship=new Ship(type,weight,length,cargoType,companyName);
+        ship.printShip();
+    }
+    public static void ten(){
+        System.out.println("--10--");
+        Scanner obj = new Scanner(System.in);
+        double weigth=obj.nextDouble();
+        double price=obj.nextDouble();
+        boolean isUrgent=obj.nextBoolean();
+        Delivery del=new Delivery(weigth,price,isUrgent);
+        del.printDelivery();
+    }
+    public static void nine(){
+        System.out.println("--9--");
+        Scanner obj = new Scanner(System.in);
+        int enumenator=obj.nextInt();
+        int denumenator=obj.nextInt();
+        Fraction f = new Fraction(enumenator,denumenator);
+        f.print();
+    }
+    public static void eight(){
+        System.out.println("--8--");
+        Scanner obj = new Scanner(System.in);
+        System.out.println("Enter first laptop");
+        int ram1=obj.nextInt();
+        double cpuClock1=obj.nextDouble();
+        String cpuModel1=obj.next();
+        String gpuModel1=obj.next();
+        System.out.println("Enter second laptop");
+        int ram2=obj.nextInt();
+        double cpuClock2=obj.nextDouble();
+        String cpuModel2=obj.next();
+        String gpuModel2=obj.next();
+        Laptop l1=new Laptop(ram1,cpuClock1,cpuModel1,gpuModel1);
+        Laptop l2=new Laptop(ram2,cpuClock2,cpuModel2,gpuModel2);
+        l1.betterLaptop(l2);
+    }
     public static void seven(){
         System.out.println("--7--");
         Scanner obj = new Scanner(System.in);
@@ -369,5 +516,10 @@ class Rational{
         five();
         six();
         seven();
+        eight();
+        nine();
+        ten();
+        eleven();
+        twelve();
     }
 }
