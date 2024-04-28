@@ -6,7 +6,6 @@ import java.io.*;
 import java.io.Serializable;
 import java.time.*;
 import java.util.regex.*;
-import java.util.ArrayList;
 
 class User implements Serializable{
     public String username;
@@ -28,14 +27,6 @@ class User implements Serializable{
         if(this.password.equals(pass)) {
             return true;
         }else {
-            return false;
-        }
-    }
-    public boolean makeDeposit(double amount) {
-        try {
-            this.deposit+=amount;
-            return true;
-        }catch(Exception e) {
             return false;
         }
     }
