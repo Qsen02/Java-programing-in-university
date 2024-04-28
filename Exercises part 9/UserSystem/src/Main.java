@@ -1,5 +1,4 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.io.*;
@@ -228,7 +227,60 @@ class Administration{
             System.out.println("We have an error!");
             return 0;
         }
-
+    }
+    public static Book searchBook(){
+        try {
+            Scanner obj = new Scanner(System.in);
+            System.out.println("Enter title of the book");
+            String title = obj.next();
+            File bookFile = new File("catalogue.txt");
+            Scanner myReader = new Scanner(bookFile);
+            String data="";
+            while (myReader.hasNextLine()) {
+                data = myReader.nextLine();
+                String[] arr = data.split(",");
+                if (arr[0].equals(title)) {
+                    break;
+                }
+            }
+            String[] arr = data.split(",");
+            FileInputStream file=new FileInputStream(arr[1]+".ser");
+            ObjectInputStream in = new ObjectInputStream(file);
+            Book book = (Book)in.readObject();
+            in.close();
+            file.close();
+            System.out.println("Book was searched successfully!");
+            System.out.printf("Title:%s\n",book.title);
+            System.out.printf("Author:%s\n",book.author);
+            System.out.printf("Content:%s\n",book.content);
+            System.out.printf("ISBN:%s\n",book.ISBN);
+            return book;
+        }catch(Exception error){
+            System.out.println("Book not found!");
+            return null;
+        }
+    }
+    public static void buyBook(Book book,User user){
+        try {
+            FileOutputStream file = new FileOutputStream(user.id + ".ser");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            if(user.deposit>2){
+                user.deposit -=2;
+                System.out.println("Book was bought successfully!");
+                System.out.printf("Title:%s\n",book.title);
+                System.out.printf("Author:%s\n",book.author);
+                System.out.printf("Content:%s\n",book.content);
+                System.out.printf("ISBN:%s\n",book.ISBN);
+                System.out.printf("Your deposit:%f",user.deposit);
+            }else{
+                System.out.println("You don't have enough deposit!");
+            }
+            out.writeObject(user);
+            out.close();
+            file.close();
+        }catch(Exception error) {
+            System.out.println("We have an error!");
+        }
     }
     public static void menu() {
         Scanner obj = new Scanner(System.in);
@@ -237,7 +289,7 @@ class Administration{
         if (option.equals("admin")) {
             boolean isAdmin=Administration.adminLog();
             if(isAdmin) {
-                System.out.println("Do you want to add books? (yes/no)");
+                System.out.println("Do you want to add books? (yes/exit)");
                 String bookOption = obj.next();
                 if (bookOption.equals("yes")) {
                     Administration.addBook();
@@ -251,12 +303,23 @@ class Administration{
             if (newOption.equals("login")) {
                 User isUser=Administration.logUser();
                 if(isUser!=null) {
-                    System.out.println("Do you want to enter deposit? (yes/no)");
-                    String depositOption = obj.next();
-                    if (depositOption.equals("yes")) {
+                    System.out.println("Do you want to enter deposit or search the book? (deposit/search)");
+                    String userOption = obj.next();
+                    if (userOption.equals("deposit")) {
                         Administration.enterDeposit();
-                    } else {
-                        System.out.println("Have a nice day!");
+                    } else if(userOption.equals("search")){
+                         Book result=Administration.searchBook();
+                         if(result!=null) {
+                             System.out.println("Do you want to search new book or buy this book or exit? (search/buy/exit)");
+                             String userOption2 = obj.next();
+                             if (userOption2.equals("search")) {
+                                 Administration.searchBook();
+                             }else if(userOption2.equals("buy")){
+                                    Administration.buyBook(result,isUser);
+                             }else{
+                                 System.out.println("Have a nice day!");
+                             }
+                         }
                     }
                 }
             } else {
@@ -265,7 +328,6 @@ class Administration{
         }
     }
 }
-
 public class Main {
     public static void main(String[] args) {
         Administration.menu();
