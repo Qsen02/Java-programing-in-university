@@ -76,8 +76,15 @@ class Administration{
             if(User.verifyPassword(password)) {
                 User user1= new User(username,password,email);
                 File userFile=new File("Users.txt");
+                String list="";
+                Scanner reader=new Scanner(userFile);
+                while(reader.hasNextLine()) {
+                    list+=reader.nextLine()+"\n";
+                }
+                reader.close();
+                list+=user1.id+","+user1.username;
                 FileWriter writer=new FileWriter(userFile);
-                writer.write(user1.id+","+user1.username+"\n");
+                writer.write(list+"\n");
                 writer.close();
                 FileOutputStream file=new FileOutputStream(user1.id+".ser");
                 ObjectOutputStream ou=new ObjectOutputStream(file);
@@ -174,8 +181,15 @@ class Administration{
             String ISBN = obj.next();
             Book book = new Book(title, author, content, ISBN);
             File bookFile = new File("catalogue.txt");
-            FileWriter writer = new FileWriter(bookFile);
-            writer.write(book.title+","+book.ISBN);
+            String list="";
+            Scanner reader=new Scanner(bookFile);
+            while(reader.hasNextLine()) {
+                list+=reader.nextLine()+"\n";
+            }
+            reader.close();
+            list+=book.title+","+book.ISBN;
+            FileWriter writer=new FileWriter(bookFile);
+            writer.write(list+"\n");
             writer.close();
             FileOutputStream file=new FileOutputStream(book.ISBN+".ser");
             ObjectOutputStream ou=new ObjectOutputStream(file);
@@ -188,7 +202,6 @@ class Administration{
             System.out.println("Book failed to add!");
             return null;
         }
-
     }
 
     public static double enterDeposit(){
