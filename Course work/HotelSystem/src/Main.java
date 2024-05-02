@@ -53,15 +53,25 @@ class Rooms implements Serializable {
     public boolean isReserv;
     public int peopleCount;
     public int days;
+    public String owner;
     public Rooms(double price, int number) {
         this.price = price;
         this.number = number;
         this.isReserv = false;
         this.peopleCount = 0;
         this.days = 0;
+        this.owner ="No";
     }
     public double calcPrice(){
         return this.price*this.peopleCount*this.days;
+    }
+    public void print(){
+        System.out.printf("Price: %.2f\n", this.price);
+        System.out.printf("Number: %d\n", this.number);
+        System.out.printf("Reserve: %b\n", this.isReserv);
+        System.out.printf("People Count: %d\n", this.peopleCount);
+        System.out.printf("Days: %d\n", this.days);
+        System.out.printf("Owner: %s\n", this.owner);
     }
 }
 
@@ -208,6 +218,20 @@ class Reservation {
             error.printStackTrace();
         }
     }
+    public static void checkRoom(){
+        Scanner obj=new Scanner(System.in);
+        System.out.println("Enter room number");
+        int roomNumber=obj.nextInt();
+        try{
+            FileInputStream file=new FileInputStream(String.valueOf(roomNumber)+".ser");
+            ObjectInputStream in=new ObjectInputStream(file);
+            Rooms room=(Rooms)in.readObject();
+            room.print();
+        }catch(Exception error){
+            System.out.println("We have an Error");
+            error.printStackTrace();
+        }
+    }
     public static Rooms searchRoom(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter room number");
@@ -265,6 +289,7 @@ class Reservation {
                     roomObj.days = days;
                     roomObj.isReserv = true;
                     user1.deposit-=roomObj.calcPrice();
+                    roomObj.owner=user1.username;
                     FileOutputStream writeFile = new FileOutputStream(String.valueOf(room.number) + ".ser");
                     ObjectOutputStream out = new ObjectOutputStream(writeFile);
                     out.writeObject(roomObj);
@@ -319,12 +344,18 @@ class Reservation {
         if(option.equals("admin")){
             boolean isLog=Reservation.adminLog();
             if(isLog){
-                System.out.println("Do you want to add room to the reservation system? (y/n)");
+                System.out.println("Do you want to continue? (y/n)");
                 String answer=sc.next();
                 if(answer.equals("y")) {
                     while(answer.equals("y")) {
-                        Reservation.addRoom();
-                        System.out.println("Do you want to add room to the reservation system? (y/n)");
+                        System.out.println("Do you want to add room or check room? (add/check)");
+                        String option2=sc.next();
+                        if(option2.equals("add")) {
+                            Reservation.addRoom();
+                        }else {
+                            Reservation.checkRoom();
+                        }
+                        System.out.println("Do you want to continue? (y/n)");
                         answer=sc.next();
                     }
                     System.out.println("Have a nice day!");
