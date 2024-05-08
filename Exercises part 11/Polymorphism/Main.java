@@ -131,6 +131,7 @@ class BalanceS extends SavingAccount{
             System.out.println("You dont have enough money!");
             return;
         }
+        this.amount-=amount;
     }
 }
 
@@ -147,6 +148,10 @@ class BalanceP extends PaymantAccount{
         this.amount+=amount;
     }
     public void pay(int amount){
+        if(this.amount<amount){
+            System.out.println("You dont have enough money!");
+            return;
+        }
         this.amount-=amount;
     }
 }
