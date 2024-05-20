@@ -228,8 +228,7 @@ class Reservation {
             Rooms room=(Rooms)in.readObject();
             room.print();
         }catch(Exception error){
-            System.out.println("We have an Error");
-            error.printStackTrace();
+            System.out.println("This room is not available");
         }
     }
     public static Rooms searchRoom(){
@@ -317,6 +316,10 @@ class Reservation {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter deposit amount");
         double amount=sc.nextDouble();
+        if(amount<0){
+            System.out.println("You can't add negative deposit amount!");
+            return;
+        }
         try{
             FileInputStream readFile=new FileInputStream(user.uid+".ser");
             ObjectInputStream in=new ObjectInputStream(readFile);
